@@ -1,0 +1,4 @@
+[submodule "oras"]
+	path = oras
+  url = https://github.com/oras-project/oras.git
+  branch = main
