@@ -1,9 +1,9 @@
 # oras-downstream
-A repo showcasing a basic 'Midstream' solution
+A repo showcasing a basic 'MidStream' solution
 
 # Basic definitions
-- upstream repo: The open source project repo we want to track
-- downstream repo: The Red Hat repo holding the git submodule reference to the upstream repo
+- Upstream repo: The open source project repo we want to track
+- Downstream repo: The Red Hat repo holding the git submodule reference to the upstream repo
 
 # Workflow
 ## Create a downstream repo
