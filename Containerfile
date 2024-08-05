@@ -13,7 +13,7 @@
 
 FROM docker.io/library/golang:1.22.3-alpine as builder
 ARG TARGETPLATFORM
-#RUN dnf -y install git make && dnf -y clean all
+RUN apk add git make
 ENV ORASPKG /oras
 ADD . ${ORASPKG}
 WORKDIR ${ORASPKG}/oras
