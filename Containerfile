@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.22 as builder
+FROM docker.io/library/golang:1.22.3-alpine as builder
 ARG TARGETPLATFORM
 #RUN dnf -y install git make && dnf -y clean all
 ENV ORASPKG /oras
