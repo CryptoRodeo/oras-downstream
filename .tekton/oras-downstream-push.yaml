@@ -24,7 +24,7 @@ spec:
   - name: output-image
     value: quay.io/redhat-user-workloads/bramos-tenant/midstream-gitmodule-pattern/oras-downstream:{{revision}}
   - name: dockerfile
-    value: Dockerfile
+    value: Containerfile
   pipelineSpec:
     finally:
     - name: show-sbom
