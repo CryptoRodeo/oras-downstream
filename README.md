@@ -24,10 +24,13 @@ Check and configure the git submodule config:
   branch = main # Ensure the branch is correct
 ```
 
-## Configure CI tooling to watch the upstream repo git submodule for dependencies
+## Additional Tooling
 ### Github
-#### Dependabot
-**Note:** It appears that Konflux already does this. No need to add external tooling.
+#### Keep your upstream repo git module reference up to date
+##### Dependabot
+**Note:** 
+- It appears that Konflux already does this. No need to add external tooling.
+- Here is an [example](https://github.com/CryptoRodeo/oras-downstream/pull/12)
 
 On Github you can use the Dependabot tool to keep your git submodule's dependencies up to date.
 Dependabot will create pull requests to update these dependencies when new versions are available.
@@ -57,3 +60,6 @@ updates:
     schedule:
       interval: "daily"
 ```
+
+### Gitlab
+**Currently there does not seem to be Konflux support for Gitlab repos.**
