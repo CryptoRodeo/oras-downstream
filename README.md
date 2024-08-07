@@ -37,7 +37,7 @@ Check and configure the git submodule config:
   branch = main # Ensure the branch is correct
 ```
 
-## Add Additional Tooling
+## Configure Additional Tooling
 ### Konflux CI
 *pending*
 
