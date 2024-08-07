@@ -27,6 +27,8 @@ Check and configure the git submodule config:
 ## Configure CI tooling to watch the upstream repo git submodule for dependencies
 ### Github
 #### Dependabot
+**Note:** It appears that Konflux already does this. No need to add external tooling.
+
 On Github you can use the Dependabot tool to keep your git submodule's dependencies up to date.
 Dependabot will create pull requests to update these dependencies when new versions are available.
 
