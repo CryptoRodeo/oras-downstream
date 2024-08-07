@@ -1,11 +1,24 @@
-# oras-downstream
-A repo showcasing a basic 'MidStream' solution
+# Upstream/Downstream git module solution (ROUGH DRAFT)
+**Version:** -1
 
 # Basic definitions
-- Upstream repo: The open source project repo we want to track
-- Downstream repo: The Red Hat repo holding the git submodule reference to the upstream repo
+- **Upstream repo**: The open source project repo we want to track, sync and pull in.
+- **Downstream repo**: The Red Hat repo holding the git submodule reference(s) to the upstream repo
+- **Git Submodule**:
+  - A repository within another repository. 
+  - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream). 
+  - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
 
-# Workflow
+# About
+A repo showcasing a basic container-first 'Mid Stream' solution using Git submodules.
+
+## How this solution pattern works
+1. Create a "downstream" repo in github.
+2. Track your upstream git repo with a git submodule reference.
+3. Use dependabot to keep that up to date.
+4. In your downstream repo, apply patches in your Containerfile if you need to carry downstream patches.
+
+# Implementing this solution pattern
 ## Create a downstream repo
 This repo will be used to hold the git submodule reference to the upstream repository.
 
