@@ -1,5 +1,5 @@
 # Upstream/Downstream git module solution (ROUGH DRAFT)
-**Version:** -1
+**Draft Version:** -1
 
 # Basic definitions
 - **Upstream repo**: The open source project repo we want to track, sync and pull in.
@@ -10,7 +10,7 @@
   - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
 
 # About
-A repo showcasing a basic container-first 'Mid Stream' solution using Git submodules.
+A repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
 
 ## How this solution pattern works
 1. Create a "downstream" repo in github.
@@ -37,7 +37,10 @@ Check and configure the git submodule config:
   branch = main # Ensure the branch is correct
 ```
 
-## Additional Tooling
+## Add Additional Tooling
+### Konflux CI
+*pending*
+
 ### Github
 #### Keep your upstream repo git module reference up to date
 ##### Dependabot
