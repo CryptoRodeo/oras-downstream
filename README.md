@@ -9,6 +9,9 @@
   - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream). 
   - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
 
+# Konflux-specific definitions
+See the [official glossary](https://konflux-ci.dev/docs/glossary/) for a full list.
+
 # About
 A repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
 
@@ -40,6 +43,18 @@ Check and configure the git submodule config:
 ## Configure Additional Tooling
 ### Konflux CI
 *pending*
+The [official Konflux CI docs](https://konflux-ci.dev/docs/getting-started/) are currently geared towards configuring YAML files.
+> At the time of publication, to create applications in Konflux, you need to manually configure them by editing YAML files
+
+For this repository the Konflux UI was used to configure Konflux CI.
+
+Here are the steps:
+Github:
+- Install and configure the [Red Hat Konflux](https://github.com/apps/red-hat-konflux) Github application
+
+Konflux UI (PENDING):
+- Create an application in your workspace
+- Add the repository as a component
 
 ### Github
 #### Keep your upstream repo git module reference up to date
