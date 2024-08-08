@@ -60,9 +60,10 @@ After creating the repository, onboard to Konflux and configure your application
 **Note:**
 The [official Konflux CI docs](https://konflux-ci.dev/docs/getting-started/) are currently geared towards configuring YAML files.
 > At the time of publication, to create applications in Konflux, you need to manually configure them by editing YAML files
----
 
-For this repository the Konflux UI was used to configure Konflux CI.
+This repo was configured using the Konflux UI.
+There does not seem to be any detailed steps on how to do this yet via the UI.
+---
 
 Here are some **brief** steps on onboarding to Konflux using the UI:
 - Create an application in your workspace.
