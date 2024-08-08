@@ -5,25 +5,35 @@
 - **Upstream repo**: The open source project repo we want to track, sync and pull in.
 - **Downstream repo**: The Red Hat repo holding the git submodule reference(s) to the upstream repo
 - **Git Submodule**:
-  - A repository within another repository. 
-  - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream). 
+  - A repository within another repository.
+  - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream).
   - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
+- **Component**:
+  - An internal representation of a software artifact that Konflux builds and tests, using source code from a git repository.
+  - Components are stored in an OCI container registry such as quay.io after they are built.
+- **Application**: 1 or more components running together for building and releasing.
 
-# Konflux-specific definitions
-See the [official glossary](https://konflux-ci.dev/docs/glossary/) for a full list.
+For more Konflux specific definitions, see the [official glossary](https://konflux-ci.dev/docs/glossary/).
 
 # About
 A repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
+This repo:
+- Is onboarded onto Konflux
+- Uses MintMaker to detect and sync any changes on:
+  - the upstream git submodule reference
+  - Containerfile image digests
+- Has Konflux CI pull changes from this component, build the Containerfile and run tests
 
 ## How this solution pattern works
 1. Create a "downstream" repo in github.
 2. Track your upstream git repo with a git submodule reference.
-3. Use dependabot to keep that up to date.
+3. Onboard to Konflux.
 4. In your downstream repo, apply patches in your Containerfile if you need to carry downstream patches.
 
 # Implementing this solution pattern
 ## Create a downstream repo
 This repo will be used to hold the git submodule reference to the upstream repository.
+This will also be the Component we specify when onboarding to Konflux.
 
 ## Create the git submodule for the upstream repo to track it
 After creating the downstream repo, add a git submodule for the upstream repo:
@@ -40,57 +50,47 @@ Check and configure the git submodule config:
   branch = main # Ensure the branch is correct
 ```
 
-## Configure Additional Tooling
-### Konflux CI
-*pending*
+## Onboard onto to Konflux
+After creating the repository, onboard to Konflux and configure your application for Konflux CI.
+---
+**Note:**
 The [official Konflux CI docs](https://konflux-ci.dev/docs/getting-started/) are currently geared towards configuring YAML files.
 > At the time of publication, to create applications in Konflux, you need to manually configure them by editing YAML files
+---
 
 For this repository the Konflux UI was used to configure Konflux CI.
 
-Here are the steps:
-Github:
-- Install and configure the [Red Hat Konflux](https://github.com/apps/red-hat-konflux) Github application
+Here are some **brief** steps on onboarding to Konflux using the UI:
+- Create an application in your workspace.
+- Add the repository as a component.
+- If you're using Github, ensure that you have the [redhat-konflux-bot](https://github.com/apps/red-hat-konflux) enabled.
 
-Konflux UI (PENDING):
-- Create an application in your workspace
-- Add the repository as a component
+For more information on configuring creating applications and components, please see [the documentation](https://konflux-ci.dev/docs/how-tos/creating/).
 
-### Github
-#### Keep your upstream repo git module reference up to date
-##### Dependabot
-**Note:** 
-- It appears that Konflux already does this. No need to add external tooling.
-- Here is an [example](https://github.com/CryptoRodeo/oras-downstream/pull/12)
+## Potential Benefits of this pattern
+1. **Separation of Concerns**: The downstream repo can stay focused on it's specific development goals while the submodule handles it's own code. This keeps your downstream repo clean and modular.
 
-On Github you can use the Dependabot tool to keep your git submodule's dependencies up to date.
-Dependabot will create pull requests to update these dependencies when new versions are available.
+2. **Automatic Dependency Syncing with [Renovate](https://github.com/renovatebot/renovate)**: By automating the dependency sync process, whether it's syncing the git submodule, the Containerfile, etc. your downstream repo can always use the latest code from the upstream repo(s), ensuring that your project benefits from new features, bug fixes, and security updates.
 
-Create the .github directory for your repo:
-```bash
-mkdir .github
-```
+3. **Version Control for upstream repos**: You can lock the submodule to a specific commit or version, giving you control over when and how updates are integrated. This is especially useful if an upstream update introduces breaking changes.
 
-Create the dependabot yaml config file
-```
-touch .github/dependabot.yml
-```
+4. Konflux CI: Automated testing and Docker builds ensure that any changes in the upstream repo don’t break your downstream project, providing continuous integration and delivery (CI/CD) benefits.
 
-Here is a basic dependabot configuration that will watch our git submodule daily for any changes
-```yaml
+## Potential drawbacks
+1. **Complexity**: Managing submodules and automating their updates adds complexity to your workflow, such as:
+  - Debugging issues related to submodule updates
+  - Your automation configuration can be more challenging.
 
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+2. **Dependency Management**: Breaking changes in the upstream repo can affect your downstream repo, requiring manual intervention to fix integration issues.
 
-version: 2
-updates:
-  - package-ecosystem: "gitsubmodule" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "daily"
-```
+3. **Merge Conflicts**: If you have automatic updates configured, this might lead to merge conflicts, especially if both the upstream and downstream repos are being actively developed. Resolving these conflicts might require manual effort.
+
 
 ### Gitlab
-**Currently there does not seem to be Konflux support for Gitlab repos.**
+**Credit to Qixiang Wan for this information:**
+
+GitLab is supported, you need to follow https://konflux-ci.dev/docs/how-tos/configuring/creating-secrets/#creating-secrets-for-gitlab-sourced-apps to provide the token to access your GitLab repository.
+
+To do that you have to create a secret from command line. Refer to https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/getting-started/getting-access.md#accessing-konflux-via-cli for how to login with CLI.
+
+Also refer to this doc for which cluster you can use: https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/overview/deployments.md for example, you can't access internal network with public clusters, with internal clusters, you can only use internal gitlab repositories plus gitlab.com/redhat repositories, there are other restrictions as well.
