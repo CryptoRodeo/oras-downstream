@@ -16,24 +16,26 @@
 For more Konflux specific definitions, see the [official glossary](https://konflux-ci.dev/docs/glossary/).
 
 # About
-A repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
+This is a demo repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
 This repo:
-- Is onboarded onto Konflux
-- Uses MintMaker to detect and sync any changes on:
+- is onboarded onto Konflux as an application component
+- uses MintMaker to detect and sync any changes on:
   - the upstream git submodule reference
   - Containerfile image digests
-- Has Konflux CI pull changes from this component, build the Containerfile and run tests
+- has Konflux CI pull changes from this component, build the Containerfile and run tests
 
 ## How this solution pattern works
 1. Create a "downstream" repo in github.
 2. Track your upstream git repo with a git submodule reference.
-3. Onboard to Konflux.
+3. Onboard to Konflux, use [Renovate](https://github.com/renovatebot/renovate) to keep your Git submodule references up to date
 4. In your downstream repo, apply patches in your Containerfile if you need to carry downstream patches.
 
 # Implementing this solution pattern
 ## Create a downstream repo
-This repo will be used to hold the git submodule reference to the upstream repository.
-This will also be the Component we specify when onboarding to Konflux.
+The dowmstream repo will:
+- be used to hold the git submodule reference to the upstream repository.
+- contain a Containerfile that references and pulls in the git submodule(s) content.
+- become a Component of our Konflux application.
 
 ## Create the git submodule for the upstream repo to track it
 After creating the downstream repo, add a git submodule for the upstream repo:
@@ -50,6 +52,8 @@ Check and configure the git submodule config:
   branch = main # Ensure the branch is correct
 ```
 
+See the [Git documentation](https://git-scm.com/docs/gitsubmodules) for more details.
+
 ## Onboard onto to Konflux
 After creating the repository, onboard to Konflux and configure your application for Konflux CI.
 ---
@@ -62,12 +66,13 @@ For this repository the Konflux UI was used to configure Konflux CI.
 
 Here are some **brief** steps on onboarding to Konflux using the UI:
 - Create an application in your workspace.
-- Add the repository as a component.
+- Configure your application component.
 - If you're using Github, ensure that you have the [redhat-konflux-bot](https://github.com/apps/red-hat-konflux) enabled.
+- Check Konflux CI make sure everything is set up correctly.
 
 For more information on configuring creating applications and components, please see [the documentation](https://konflux-ci.dev/docs/how-tos/creating/).
 
-## Potential Benefits of this pattern
+# Potential Benefits of this pattern
 1. **Separation of Concerns**: The downstream repo can stay focused on it's specific development goals while the submodule handles it's own code. This keeps your downstream repo clean and modular.
 
 2. **Automatic Dependency Syncing with [Renovate](https://github.com/renovatebot/renovate)**: By automating the dependency sync process, whether it's syncing the git submodule, the Containerfile, etc. your downstream repo can always use the latest code from the upstream repo(s), ensuring that your project benefits from new features, bug fixes, and security updates.
@@ -76,7 +81,7 @@ For more information on configuring creating applications and components, please
 
 4. Konflux CI: Automated testing and Docker builds ensure that any changes in the upstream repo don’t break your downstream project, providing continuous integration and delivery (CI/CD) benefits.
 
-## Potential drawbacks
+# Potential drawbacks
 1. **Complexity**: Managing submodules and automating their updates adds complexity to your workflow, such as:
   - Debugging issues related to submodule updates
   - Your automation configuration can be more challenging.
@@ -86,7 +91,8 @@ For more information on configuring creating applications and components, please
 3. **Merge Conflicts**: If you have automatic updates configured, this might lead to merge conflicts, especially if both the upstream and downstream repos are being actively developed. Resolving these conflicts might require manual effort.
 
 
-### Gitlab
+# Gitlab support
+
 **Credit to Qixiang Wan for this information:**
 
 GitLab is supported, you need to follow https://konflux-ci.dev/docs/how-tos/configuring/creating-secrets/#creating-secrets-for-gitlab-sourced-apps to provide the token to access your GitLab repository.
