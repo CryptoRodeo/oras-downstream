@@ -86,7 +86,7 @@ For more information on configuring creating applications and components, please
 
 3. **Version Control for upstream repos**: You can lock the submodule to a specific commit or version, giving you control over when and how updates are integrated. This is especially useful if an upstream update introduces breaking changes.
 
-4. **Konflux CI**: Automated building and testing of your software artifacts help ensure that changes in the upstream repo don't break your downstream project,
+4. **Konflux CI**: Automated building and testing of your software artifacts help ensure that changes in the upstream repo don't break your downstream project.
 
 # Potential drawbacks
 1. **Complexity**: Managing submodules and automating their updates adds complexity to your workflow, such as:
@@ -107,3 +107,5 @@ GitLab is supported, you need to follow https://konflux-ci.dev/docs/how-tos/conf
 To do that you have to create a secret from command line. Refer to https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/getting-started/getting-access.md#accessing-konflux-via-cli for how to login with CLI.
 
 Also refer to this doc for which cluster you can use: https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/overview/deployments.md for example, you can't access internal network with public clusters, with internal clusters, you can only use internal gitlab repositories plus gitlab.com/redhat repositories, there are other restrictions as well.
+
+After onboarding your downstream Red Hat product repo in Gitlab you can reference the upstream repos as git submodules.
