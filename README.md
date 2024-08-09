@@ -108,4 +108,8 @@ To do that you have to create a secret from command line. Refer to https://gitla
 
 Also refer to this doc for which cluster you can use: https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/overview/deployments.md for example, you can't access internal network with public clusters, with internal clusters, you can only use internal gitlab repositories plus gitlab.com/redhat repositories, there are other restrictions as well.
 
-After onboarding your downstream Red Hat product repo in Gitlab you can reference the upstream repos as git submodules.
+After onboarding your downstream Red Hat product repo in Gitlab onto Konflux you should be able to follow a similar workflow pattern to the one outlined here.
+
+Here is an example of a downstream Gitlab repo with one upstream Github submodule reference: https://gitlab.cee.redhat.com/bramos/konflux-gitmodule-pattern
+
+**Note**: The Gitlab repo is not onboarded onto Konflux yet.
