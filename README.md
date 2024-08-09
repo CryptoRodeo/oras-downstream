@@ -8,6 +8,11 @@
   - A repository within another repository.
   - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream).
   - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
+- **Konflux**: A platform to automate the process of building, testing, and releasing applications.
+- **Konflux CI**: The Tekton pipelines used to build, test and release the software/product artifacts.
+- **Workspace**:
+  - A Kubernetes namespace managed by an individual or a group.
+  - All Tekton Pipelines, including build, test, and release, run within a workspace.
 - **Component**:
   - An internal representation of a software artifact that Konflux builds and tests, using source code from a git repository.
   - Components are stored in an OCI container registry such as quay.io after they are built.
@@ -56,10 +61,10 @@ Check and configure the git submodule config:
 See the [Git documentation](https://git-scm.com/docs/gitsubmodules) for more details.
 
 ## Onboard onto to Konflux
-After creating the repository, onboard to Konflux and configure your application for Konflux CI.
+After creating the repository, onboard to Konflux and configure your application and its components.
 ---
 **Note:**
-The [official Konflux CI docs](https://konflux-ci.dev/docs/getting-started/) are currently geared towards configuring YAML files.
+The [official Konflux docs](https://konflux-ci.dev/docs/getting-started/) are currently geared towards configuring YAML files.
 > At the time of publication, to create applications in Konflux, you need to manually configure them by editing YAML files
 
 This repo was configured using the Konflux UI.
@@ -70,7 +75,7 @@ Here are some **brief** steps on onboarding to Konflux using the UI:
 - Create an application in your workspace.
 - Configure your application component.
 - If you're using Github, ensure that you have the [redhat-konflux-bot](https://github.com/apps/red-hat-konflux) enabled.
-- Check Konflux CI make sure everything is set up correctly.
+- Check your Konflux CI results. Ensure that your component was able to be pulled from, built and tested.
 
 For more information on configuring creating applications and components, please see [the documentation](https://konflux-ci.dev/docs/how-tos/creating/).
 
@@ -81,7 +86,7 @@ For more information on configuring creating applications and components, please
 
 3. **Version Control for upstream repos**: You can lock the submodule to a specific commit or version, giving you control over when and how updates are integrated. This is especially useful if an upstream update introduces breaking changes.
 
-4. Konflux CI: Automated testing and Docker builds ensure that any changes in the upstream repo don’t break your downstream project, providing continuous integration and delivery (CI/CD) benefits.
+4. **Konflux CI**: Automated building and testing of your software artifacts help ensure that changes in the upstream repo don't break your downstream project,
 
 # Potential drawbacks
 1. **Complexity**: Managing submodules and automating their updates adds complexity to your workflow, such as:
