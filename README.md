@@ -3,7 +3,7 @@
 
 # Basic definitions
 - **Upstream repo**: The open source project repo we want to track, sync and pull in.
-- **Downstream repo**: The Red Hat repo holding the git submodule reference(s) to the upstream repo
+- **Downstream repo**: The Red Hat product repo holding the git submodule reference(s) to the upstream repo.
 - **Git Submodule**:
   - A repository within another repository.
   - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream).
@@ -16,13 +16,14 @@
 For more Konflux specific definitions, see the [official glossary](https://konflux-ci.dev/docs/glossary/).
 
 # About
-This is a demo repo demonstrating a basic container-first 'Mid Stream' solution using Git submodules.
+This repo demonstrates a container-first approach to move code from an upstream repository to an internal Red Hat product repository, using Git submodules and Konflux.
+
 This repo:
-- is onboarded onto Konflux as an application component
-- uses MintMaker to detect and sync any changes on:
+- has been onboarded onto Konflux as an application component
+- is configured with MintMaker to detect and sync any changes on:
   - the upstream git submodule reference
   - Containerfile image digests
-- has Konflux CI pull changes from this component, build the Containerfile and run tests
+- is configured in Konflux to pull changes from this component, build the software artifacts, and runs tests.
 
 ## How this solution pattern works
 1. Create a "downstream" repo in github.
@@ -32,7 +33,7 @@ This repo:
 
 # Implementing this solution pattern
 ## Create a downstream repo
-The dowmstream repo will:
+The downstream repo will:
 - be used to hold the git submodule reference to the upstream repository.
 - contain a Containerfile that references and pulls in the git submodule(s) content.
 - become a Component of our Konflux application.
@@ -74,9 +75,9 @@ Here are some **brief** steps on onboarding to Konflux using the UI:
 For more information on configuring creating applications and components, please see [the documentation](https://konflux-ci.dev/docs/how-tos/creating/).
 
 # Potential Benefits of this pattern
-1. **Separation of Concerns**: The downstream repo can stay focused on it's specific development goals while the submodule handles it's own code. This keeps your downstream repo clean and modular.
+1. **Separation of Concerns**: The downstream repo can stay focused on its specific development goals while the submodule handles its own code. This keeps your downstream repo clean and modular.
 
-2. **Automatic Dependency Syncing with [Renovate](https://github.com/renovatebot/renovate)**: By automating the dependency sync process, whether it's syncing the git submodule, the Containerfile, etc. your downstream repo can always use the latest code from the upstream repo(s), ensuring that your project benefits from new features, bug fixes, and security updates.
+2. **Automatic Dependency Syncing with [Renovate](https://github.com/renovatebot/renovate)**: By automating the dependency sync process, whether its syncing the git submodule, the Containerfile, etc. your downstream repo can always use the latest code from the upstream repo(s), ensuring that your project benefits from new features, bug fixes, and security updates.
 
 3. **Version Control for upstream repos**: You can lock the submodule to a specific commit or version, giving you control over when and how updates are integrated. This is especially useful if an upstream update introduces breaking changes.
 
