@@ -112,4 +112,4 @@ After onboarding your downstream Red Hat product repo in Gitlab onto Konflux you
 
 Here is an example of a downstream Gitlab repo with one upstream Github submodule reference: https://gitlab.cee.redhat.com/bramos/konflux-gitmodule-pattern
 
-**Note**: The Gitlab repo is not onboarded onto Konflux yet.
+**Note**: The Gitlab repo example has not onboarded onto Konflux yet.
