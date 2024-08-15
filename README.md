@@ -30,6 +30,11 @@ This repo:
   - Containerfile image digests
 - is configured in Konflux to pull changes from this component, build the software artifacts, and runs tests.
 
+**NOTE**:
+Consider this demo repo and documentation as a **guideline** for achieving an upstream to downstream sync, with Konflux.
+**Do not** consider this guideline as officially supported by Konflux, rather it is a guideline to follow, replicate and modify
+for your specific situation, if that situation involves git submodules.
+
 ## How this solution pattern works
 1. Create a "downstream" repo in github.
 2. Track your upstream git repo with a git submodule reference.
