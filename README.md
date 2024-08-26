@@ -2,14 +2,14 @@
 **Draft Version:** -1
 
 # Basic definitions
-- **Upstream repo**: The open source project repo we want to track, sync and pull in.
-- **Downstream repo**: The Red Hat product repo holding the git submodule reference(s) to the upstream repo.
+- **Upstream repo**: A community project which you do not have push access to (or which you do not want to push CI changes into).
+- **Downstream repo**: A self-owned copy of the upstream repository whose build, test, release lifecycle you want to control completely.
 - **Git Submodule**:
   - A repository within another repository.
   - It allows you to include and track the contents of an external repository (upstream in this case) within your own project (downstream).
   - Useful when you want to include third-party libraries or other code that is managed separately but needs to be part of your project.
 - **Konflux**: A platform to automate the process of building, testing, and releasing applications.
-- **Konflux CI**: The Tekton pipelines used to build, test and release the software/product artifacts.
+- **Konflux CI**: The Tekton pipelines used to build, test and release the software/project artifacts.
 - **Workspace**:
   - A Kubernetes namespace managed by an individual or a group.
   - All Tekton Pipelines, including build, test, and release, run within a workspace.
@@ -21,7 +21,7 @@
 For more Konflux specific definitions, see the [official glossary](https://konflux-ci.dev/docs/glossary/).
 
 # About
-This repo demonstrates a container-first approach to move code from an upstream repository to an internal Red Hat product repository, using Git submodules and Konflux.
+This repo demonstrates a container-first approach to move code from an upstream repository to an internal Red Hat project repository, using Git submodules and Konflux.
 
 This repo:
 - has been onboarded onto Konflux as an application component
@@ -113,7 +113,7 @@ To do that you have to create a secret from command line. Refer to https://gitla
 
 Also refer to this doc for which cluster you can use: https://gitlab.cee.redhat.com/konflux/docs/users/-/blob/main/topics/overview/deployments.md for example, you can't access internal network with public clusters, with internal clusters, you can only use internal gitlab repositories plus gitlab.com/redhat repositories, there are other restrictions as well.
 
-After onboarding your downstream Red Hat product repo in Gitlab onto Konflux you should be able to follow a similar workflow pattern to the one outlined here.
+After onboarding your downstream Red Hat project repo in Gitlab onto Konflux you should be able to follow a similar workflow pattern to the one outlined here.
 
 Here is an example of a downstream Gitlab repo with one upstream Github submodule reference: https://gitlab.cee.redhat.com/bramos/konflux-gitmodule-pattern
 
