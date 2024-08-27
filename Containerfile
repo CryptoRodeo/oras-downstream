@@ -23,9 +23,9 @@ RUN mv ${ORASPKG}/oras/bin/$(echo $TARGETPLATFORM | sed s/\\/v8//)/oras /usr/bin
 RUN mkdir /licenses && mv LICENSE /licenses/LICENSE
 
 ENV DOTFILESPKG /dotfiles
-ADD . ${DOTFILESPKG}/dotfiles
+ADD . ${DOTFILESPKG}
 WORKDIR ${DOTFILESPKG}/dotfiles
-RUN mkdir test
+RUN cat ./lazygit/.config/lazygit/config.yml
 
 FROM quay.io/konflux-ci/yq:latest@sha256:974dea6375ee9df561ffd3baf994db2b61777a71f3bcf0050c5dca91ac9b3430 as yq
 
