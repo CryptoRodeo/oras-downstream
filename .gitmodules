@@ -1,4 +1,7 @@
 [submodule "dotfiles"]
-  path = dotfiles
-  url = https://github.com/CryptoRodeo/dotfiles.git
+	path = dotfiles
+	url = git@github.com:CryptoRodeo/dotfiles.git
   branch = main
+[submodule "oras"]
+	path = oras
+	url = https://github.com/oras-project/oras.git
